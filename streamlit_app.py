@@ -31,9 +31,7 @@ st.header("Fruityvice Fruit Advice!")
 
 # Call the Fruityvice API from our Streamlit App and display the advice
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-advice = fruityvice_response.json()
-
-st.text(advice)
+st.text(fruityvice_response.json())
 
 
 
