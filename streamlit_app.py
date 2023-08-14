@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 
 # Title and header for the page
 st.title("My Mom's New Healthy Diner")
@@ -17,7 +18,7 @@ my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/da
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
 # Let users pick the fruits for their smoothie
-fruits_to_show = st.multiselect("Pick some fruits:", options=list(my_fruit_list.index), default=["Avocado"])
+fruits_to_show = st.multiselect("Pick some fruits:", options=list(my_fruit_list.index), default=["Avocado", "Banana"])
 
 # Filter the dataframe based on the selected fruits
 filtered_fruit_list = my_fruit_list.loc[fruits_to_show]
@@ -25,15 +26,16 @@ filtered_fruit_list = my_fruit_list.loc[fruits_to_show]
 # Display the filtered fruit data
 st.dataframe(filtered_fruit_list)
 
-
-# new session to display Fruityvice API response
+# New session to display Fruityvice API response
 st.header("Fruityvice Fruit Advice!")
 
-# Let's Call the Fruityvice API from Our Streamlit App!
-# We need to bring in another Python package library. This one is called requests.
-import requests
+# Call the Fruityvice API from our Streamlit App and display the advice
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response) 
+if fruityvice_response.status_code == 200:
+    advice = fruityvice_response.json().get('advice', 'No advice available.')
+    st.text(advice)
+else:
+    st.text("Unable to fetch advice from Fruityvice API.")
 
 
 
