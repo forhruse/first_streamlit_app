@@ -33,7 +33,7 @@ streamlit.header("Fruityvice Fruit Advice!")
 # We need to bring in another Python package library. This one is called requests.
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-streamlit.text(fruityvice_response)
+streamlit.text(fruityvice_response) 
 
 
 
