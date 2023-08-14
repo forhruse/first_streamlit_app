@@ -27,13 +27,13 @@ st.dataframe(filtered_fruit_list)
 
 
 # new session to display Fruityvice API response
-streamlit.header("Fruityvice Fruit Advice!")
+st.header("Fruityvice Fruit Advice!")
 
 # Let's Call the Fruityvice API from Our Streamlit App!
 # We need to bring in another Python package library. This one is called requests.
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-streamlit.text(fruityvice_response) 
+st.text(fruityvice_response) 
 
 
 
