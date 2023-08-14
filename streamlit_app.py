@@ -31,11 +31,10 @@ st.header("Fruityvice Fruit Advice!")
 
 # Call the Fruityvice API from our Streamlit App and display the advice
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-if fruityvice_response.status_code == 200:
-    advice = fruityvice_response.json().get('advice', 'No advice available.')
-    st.text(advice)
-else:
-    st.text("Unable to fetch advice from Fruityvice API.")
+advice = fruityvice_response.json()
+
+st.text(advice)
+
 
 
 
