@@ -30,11 +30,11 @@ st.dataframe(filtered_fruit_list)
 st.header("Fruityvice Fruit Advice!")
 
 fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-streamlit.write('The user entered ', fruit_choice)
+st.write('The user entered ', fruit_choice)
 
 # Call the Fruityvice API from our Streamlit App and display the advice
 # fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "Kiwi")
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 # take json verson of the data and normalize it 
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 # output as a table
