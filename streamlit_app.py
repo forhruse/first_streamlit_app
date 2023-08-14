@@ -31,7 +31,11 @@ st.header("Fruityvice Fruit Advice!")
 
 # Call the Fruityvice API from our Streamlit App and display the advice
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response.json())
+# st.text(fruityvice_response.json())
+# take json verson of the data and normalize it 
+fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+# output as a table
+st.dataframe(fruityvice_normalized)
 
 
 
