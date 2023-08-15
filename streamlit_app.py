@@ -52,7 +52,12 @@ st.header("The fruit load list contains:")
 # st.text(my_data_row)
 st.dataframe(my_data_rows)
 
-
+# allow user to add a fruit to the list
+add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
+st.write('Thanks for adding ', add_my_fruit)
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + add_my_fruit)
+fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+st.dataframe(fruityvice_normalized)
 
 
 
