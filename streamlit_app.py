@@ -74,6 +74,9 @@ try:
 except URLError as e:
         st.error();
 
+# put a stop for trouble shooting - streamlit.stop
+st.stop()
+
 # first time - Add Snowflake Connection Info to Our Streamlit Secrets File,
              # then qurrey snowflake data from streamlit
 # my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
