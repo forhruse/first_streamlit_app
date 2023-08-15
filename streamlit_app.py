@@ -29,10 +29,10 @@ filtered_fruit_list = my_fruit_list.loc[fruits_to_show]
 st.dataframe(filtered_fruit_list)
 
 # New session to display Fruityvice API response
-  #st.header("Fruityvice Fruit Advice!")
+  # st.header("Fruityvice Fruit Advice!")
 
-  #fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-  #st.write('The user entered ', fruit_choice)
+  # fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
+  # st.write('The user entered ', fruit_choice)
 
   # Call the Fruityvice API from our Streamlit App and display the advice
      # fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
@@ -61,8 +61,8 @@ st.dataframe(filtered_fruit_list)
 def get_fruitvice_data(this_fruit_choice):
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
         fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
-    return  fruityvice_normalized
-
+        return fruityvice_normalized
+  
 st.header("Fruityvice Fruit Advice!")
 try: 
     fruit_choice = st.text_input('What fruit would you like information about?')
