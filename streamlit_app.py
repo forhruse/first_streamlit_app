@@ -44,7 +44,7 @@ st.dataframe(filtered_fruit_list)
 
 # New session with Try and Except to display Fruityvice API response
 st.header("Fruityvice Fruit Advice!")
-Try: 
+try: 
     fruit_choice = st.text_input('What fruit would you like information about?')
     if not fruit_choice:
         st.error("Please selecct a fruit to get information.")
@@ -52,7 +52,7 @@ Try:
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
         fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
         st.dataframe(fruityvice_normalized)
-Except URLError as e:
+except URLError as e:
         st.error();
 
 # put a stop for trouble shooting - streamlit.stop
