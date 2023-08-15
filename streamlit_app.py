@@ -43,8 +43,8 @@ fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 st.dataframe(fruityvice_normalized)
 
 
-# put a stop for trouble shooting
-Streamlit.stop()
+# put a stop for trouble shooting - streamlit.stop
+st.stop()
 
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
