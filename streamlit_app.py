@@ -77,11 +77,6 @@ except requests.exceptions.RequestException as e:
     st.error("An error occurred while fetching data from the Fruityvice API.")
 
 
-
-
-# put a stop for trouble shooting - streamlit.stop
-st.stop()
-
 # first time - Add Snowflake Connection Info to Our Streamlit Secrets File,
              # then qurrey snowflake data from streamlit
 # my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
@@ -103,9 +98,9 @@ def get_fruit_load_list():
         return my_cur.fetchall()
 # add a button to load data
 if st.button('Get Fruit Load List'):
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-my_data_rows = get_fruit_load_list()
-st.dataframe(my_data_rows)
+  my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+  my_data_rows = get_fruit_load_list()
+  st.dataframe(my_data_rows)
 
 # put a stop for trouble shooting - streamlit.stop
 st.stop()
