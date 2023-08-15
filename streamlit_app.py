@@ -28,7 +28,7 @@ filtered_fruit_list = my_fruit_list.loc[fruits_to_show]
 # Display the filtered fruit data
 st.dataframe(filtered_fruit_list)
 
-# New session to display Fruityvice API response
+# first time - display Fruityvice API response
   # st.header("Fruityvice Fruit Advice!")
 
   # fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
@@ -42,7 +42,7 @@ st.dataframe(filtered_fruit_list)
   # output as a table
   #st.dataframe(fruityvice_normalized)
 
-# Second New session with Try and Except to display Fruityvice API response
+# Second time - with Try and Except to display Fruityvice API response
 # st.header("Fruityvice Fruit Advice!")
 # try: 
     # fruit_choice = st.text_input('What fruit would you like information about?')
@@ -55,7 +55,7 @@ st.dataframe(filtered_fruit_list)
 # except URLError as e:
        # st.error();
 
-# Third New session with FUNCTION to display Fruityvice API response
+# Third time - with FUNCTION to display Fruityvice API response
 # Create function to fetch data from Fruityvice API
 def get_fruitvice_data(this_fruit_choice):
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
@@ -75,9 +75,8 @@ try:
 except requests.exceptions.RequestException as e:
     st.error("An error occurred while fetching data from the Fruityvice API.")
 
-
-# first time - Add Snowflake Connection Info to Our Streamlit Secrets File,
-             # then qurrey snowflake data from streamlit
+# qurrey snowflake data from streamlit
+# first time - Add Snowflake Connection Info to Our Streamlit Secrets File, then quarrey snowflake
 # my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 # my_cur = my_cnx.cursor()
   # my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
@@ -91,15 +90,24 @@ except requests.exceptions.RequestException as e:
 
 # second time - Move the Fruit Load List Query and Load into a Button Action
 st.header("The fruit load list contains:")
-def get_fruit_load_list():
-        with  my_cnx.cursor() as my_cur: 
-              my_cur.execute("SELECT * from pc_rivery_db.public.fruit_load_list")
+# Create function to fetch fruit load list
+def get_fruit_load_list(connection):
+    with connection.cursor() as my_cur:
+        my_cur.execute("SELECT * from pc_rivery_db.public.fruit_load_list")
         return my_cur.fetchall()
-# add a button to load data
-if st.button('Get Fruit Load List'):
-  my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-  my_data_rows = get_fruit_load_list()
-  st.dataframe(my_data_rows)
+
+# Connect to Snowflake using Streamlit secrets
+try:
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+
+    # Add a button to load data
+    if st.button('Get Fruit Load List'):
+        my_data_rows = get_fruit_load_list(my_cnx)
+        st.dataframe(my_data_rows)
+except snowflake.connector.errors.DatabaseError as e:
+    st.error("Error connecting to the Snowflake database.")
+
+
 
 # put a stop for trouble shooting - streamlit.stop
 st.stop()
