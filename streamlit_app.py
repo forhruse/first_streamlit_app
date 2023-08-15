@@ -55,7 +55,6 @@ st.dataframe(filtered_fruit_list)
 # except URLError as e:
        # st.error();
 
-
 # Third New session with FUNCTION to display Fruityvice API response
 # Create function to fetch data from Fruityvice API
 def get_fruitvice_data(this_fruit_choice):
