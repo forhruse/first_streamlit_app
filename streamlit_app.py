@@ -118,11 +118,10 @@ except snowflake.connector.errors.DatabaseError as e:
 # Create function to insert a new fruit row
 def insert_row_snowflake(connection, new_fruit):
     with connection.cursor() as my_cur:
-       # my_cur.execute("INSERT INTO pc_rivery_db.public.fruit_load_list (fruit_name) VALUES (?)", (new_fruit,))
-       my_cur.execute("INSERT INTO pc_rivery_db.public.fruit_load_list (fruit_name) VALUES (from streamlit) ", (new_fruit,))
+       my_cur.execute("INSERT INTO pc_rivery_db.public.fruit_load_list (fruit_name) VALUES (?)", (new_fruit,))
        connection.commit()
        return "Thanks for adding " + new_fruit
-
+      
 # Connect to Snowflake using Streamlit secrets
 try:
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
