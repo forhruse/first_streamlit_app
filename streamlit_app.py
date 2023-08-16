@@ -89,7 +89,8 @@ except requests.exceptions.RequestException as e:
 # st.dataframe(my_data_rows)
 
 # second time - Move the Fruit Load List Query and Load into a Button Action
-st.header("The fruit load list contains:")
+# st.header("The fruit load list contains:")
+st.header("View Our Fruit List - Add Your Favorites!")
 # Create function to fetch fruit load list
 def get_fruit_load_list(connection):
     with connection.cursor() as my_cur:
@@ -101,7 +102,8 @@ try:
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 
     # Add a button to load data
-    if st.button('Get Fruit Load List'):
+    # if st.button('Get Fruit Load List'):
+    if st.button('Get Fruit List'):
         my_data_rows = get_fruit_load_list(my_cnx)
         st.dataframe(my_data_rows)
 except snowflake.connector.errors.DatabaseError as e:
