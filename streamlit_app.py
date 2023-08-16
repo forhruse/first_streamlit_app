@@ -22,7 +22,7 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 # Let users pick the fruits for their smoothie
 fruits_to_show = st.multiselect("Pick some fruits:", options=list(my_fruit_list.index), default=["Avocado", "Banana"])
 
-# Filter the dataframe based on the selected fruits
+# Filter the dataframe based on the selected fruits 
 filtered_fruit_list = my_fruit_list.loc[fruits_to_show]
 
 # Display the filtered fruit data
