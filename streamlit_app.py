@@ -117,10 +117,13 @@ except snowflake.connector.errors.DatabaseError as e:
 # second time - Use a Function and Button to Add the Fruit Name Submissions
 # Create function to insert a new fruit row
 def insert_row_snowflake(connection, new_fruit):
-    with connection.cursor() as my_cur:
-       my_cur.execute("INSERT INTO pc_rivery_db.public.fruit_load_list (fruit_name) VALUES (?)", (new_fruit,))
-       connection.commit()
-       return "Thanks for adding " + new_fruit
+    try:
+        with connection.cursor() as my_cur:
+            my_cur.execute("INSERT INTO pc_rivery_db.public.fruit_load_list (fruit_name) VALUES (%s)", (new_fruit,))
+            connection.commit()
+            return "Thanks for adding " + new_fruit
+    except snowflake.connector.errors.DatabaseError as e:
+        return "An error occurred while adding the fruit."
       
 # Connect to Snowflake using Streamlit secrets
 try:
@@ -136,6 +139,7 @@ try:
             st.warning("Please enter a fruit name.")
 except snowflake.connector.errors.DatabaseError as e:
     st.error("Error connecting to the Snowflake database.")
+
 
 # put a stop for trouble shooting - streamlit.stop
 st.stop()
