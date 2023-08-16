@@ -108,16 +108,23 @@ except snowflake.connector.errors.DatabaseError as e:
     st.error("Error connecting to the Snowflake database.")
 
 
+# fist time - allow user to add a fruit to the list
+  # add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
+  # st.write('Thanks for adding ', add_my_fruit)
+# this will not work correclty, but just go with it for now
+  # my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('from streamlit' )")
+
+# second time - Use a Function and Button to Add the Fruit Name Submissions
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur
+         my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('from streamlit' )")
+         return "Thanks for adding " + new_fruit
+add_my_fruit = st.text_input('What fruit would you like to add?')
+if st.button('Add a Fruit to the List'):
+   my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+   back_from_function = insert_row_snowflake(add_my_fruit)
+   st.text(back_from_function)
 
 # put a stop for trouble shooting - streamlit.stop
 st.stop()
-
-# allow user to add a fruit to the list
-add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
-st.write('Thanks for adding ', add_my_fruit)
-
-# this will not work correclty, but just go with it for now
-my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('from streamlit' )")
-
-
 
